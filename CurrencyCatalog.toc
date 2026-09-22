@@ -1,0 +1,18 @@
+## Interface: 120100
+## Title: Currency Catalog
+## Notes: Catalogs everything buyable with non-gold currencies, scanned live from vendors. Opens beside the character sheet.
+## Author: Shannon
+## Version: 1.2.3
+## SavedVariables: CurrencyCatalogDB
+## OptionalDeps: TomTom
+## IconTexture: Interface\Icons\inv_misc_coin_02
+
+# NOTE: Set "Interface" above to your current client build. To find it, log in and run:
+#   /run print((select(4, GetBuildInfo())))
+# If it is wrong the addon still loads when "Load out of date AddOns" is checked.
+
+Core.lua
+Scanner.lua
+TomTom.lua
+UI.lua
+CurrencyButton.lua
