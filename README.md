@@ -22,9 +22,10 @@ sells it, and click a vendor to drop a TomTom (or built-in) waypoint.
 
 ## Install
 
-1. Copy the `CurrencyCatalog` folder into:
-   `World of Warcraft\_retail_\Interface\AddOns\`
-   (so you end up with `...\AddOns\CurrencyCatalog\CurrencyCatalog.toc`)
+1. Create a folder named `CurrencyCatalog` inside
+   `World of Warcraft\_retail_\Interface\AddOns\` and copy all the files from
+   this repository into it (so you end up with
+   `...\AddOns\CurrencyCatalog\CurrencyCatalog.toc`).
 2. Restart the game, or `/reload` if already logged in.
 3. (Optional) Install **TomTom** for arrow-style navigation.
 
@@ -43,8 +44,7 @@ Put that number on the `## Interface:` line.
 ## Usage
 
 - Open your character sheet, go to the **Currency** tab, and click the coin icon
-  next to a currency — or use the **Open Catalog** button at the bottom of that
-  tab.
+  next to a currency.
 - `/cc` or `/currencycatalog` — toggle the catalog window.
 - `/cc stats` — print how many items/vendors have been catalogued.
 - `/cc wipe` — clear all scanned item/vendor data (currencies are kept).
@@ -72,4 +72,4 @@ Put that number on the `## Interface:` line.
 | `UI.lua` | Catalog window, currency/item lists, detail panel |
 | `CurrencyButton.lua` | Currency-tab icon + footer button |
 
-Version 0.1.0
+Version 1.2.3
