@@ -196,10 +196,11 @@ Known fragile spots, in order of likelihood to break on a patch:
 
 | Version / commit | Date | Notes |
 |------------------|------|-------|
-| v1.2.3 (`4cfd9ae`) | 2026-09-03 | Current stable release. Deployed to live AddOns folder. Tagged; a stray duplicate tag `vv1.2.3` also exists locally and can be deleted. |
+| v1.2.3 (`4cfd9ae`) | 2026-09-03 | Current stable release. Deployed to live AddOns folder. Tagged `v1.2.3` (stray duplicate `vv1.2.3` deleted 2026-11-17). |
 | `82857e2` | 2026-09-22 | Add `.gitignore`. Pushed. |
 | `3f88027` | 2026-11-17 | README corrections (flat-layout install steps, removed disabled-button mention, version footer). No code change. |
-| (this file) | 2026-11-17 | Add `CCDesign.md`. |
+| `4442cb8` | 2026-11-17 | Add `CCDesign.md`. |
+| (housekeeping) | 2026-11-17 | Removed stray `vv1.2.3` tag; Lua syntax check of all five files clean; pushed `main` and `v1.2.3` tag to GitHub. |
 
 Current state: **no open bugs reported.** Live install matches repo HEAD. No work in flight.
 
