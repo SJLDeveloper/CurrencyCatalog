@@ -94,6 +94,11 @@ Drift check between repo and live install (bash):
   repository binding**, so `git push` from Claude fails even though the account
   GitHub connection is valid. Pushing requires either Shannon's own terminal or
   a Claude Code cloud session started with the repo selected.
+  *Workaround that works (2026-11-17):* commit locally, `git bundle create cc.bundle main`
+  in the repo, stage it to the cloud container, attach the repo there with push access,
+  shallow-clone, `git fetch cc.bundle main:local-main`, push `local-main:main`, then delete
+  the bundle and `git update-ref refs/remotes/origin/main <sha>` locally. Ref *deletions*
+  (tags/branches) are blocked by the proxy and must be done from Shannon's terminal.
 - The WTF/SavedVariables folder (`CurrencyCatalog.lua` saved data) has never
   been connected. Ask before requesting it.
 
@@ -196,11 +201,11 @@ Known fragile spots, in order of likelihood to break on a patch:
 
 | Version / commit | Date | Notes |
 |------------------|------|-------|
-| v1.2.3 (`4cfd9ae`) | 2026-09-03 | Current stable release. Deployed to live AddOns folder. Tagged `v1.2.3` (stray duplicate `vv1.2.3` deleted 2026-11-17). |
+| v1.2.3 (`4cfd9ae`) | 2026-09-03 | Current stable release. Deployed to live AddOns folder. Tagged `v1.2.3`. Stray duplicate `vv1.2.3` deleted locally 2026-11-17 but **still on GitHub** — remove with `git push origin :refs/tags/vv1.2.3` from Shannon's terminal (Claude's proxy blocks remote tag deletion). |
 | `82857e2` | 2026-09-22 | Add `.gitignore`. Pushed. |
 | `3f88027` | 2026-11-17 | README corrections (flat-layout install steps, removed disabled-button mention, version footer). No code change. |
 | `4442cb8` | 2026-11-17 | Add `CCDesign.md`. |
-| (housekeeping) | 2026-11-17 | Removed stray `vv1.2.3` tag; Lua syntax check of all five files clean; pushed `main` and `v1.2.3` tag to GitHub. |
+| (housekeeping) | 2026-11-17 | Removed stray `vv1.2.3` tag; Lua syntax check of all five files clean; pushed `main` to GitHub (`v1.2.3` tag was already there). |
 
 Current state: **no open bugs reported.** Live install matches repo HEAD. No work in flight.
 
