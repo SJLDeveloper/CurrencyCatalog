@@ -178,19 +178,19 @@ end
 -- 12.1.5 (Blizzard_Deprecated* addons dropped); prefer the C_Item namespace and
 -- keep the globals as a fallback for older clients.
 local function itemInfoInstant(link)
-    if C_Item and C_Item.GetItemInfoInstant then return C_Item.GetItemInfoInstant(link) end
-    if GetItemInfoInstant then return GetItemInfoInstant(link) end
-    return nil
+    local fn = (C_Item and C_Item.GetItemInfoInstant) or GetItemInfoInstant
+    if type(fn) ~= "function" then return nil end
+    local ok, itemID, itemType, itemSubType, equipLoc, icon, classID, subClassID = pcall(fn, link)
+    if not ok then return nil end
+    return itemID, itemType, itemSubType, equipLoc, icon, classID, subClassID
 end
 
 local function itemQuality(link)
-    local q
-    if C_Item and C_Item.GetItemInfo then
-        q = select(3, C_Item.GetItemInfo(link))
-    elseif GetItemInfo then
-        q = select(3, GetItemInfo(link))
-    end
-    return q
+    local fn = (C_Item and C_Item.GetItemInfo) or GetItemInfo
+    if type(fn) ~= "function" then return nil end
+    local ok, _, _, quality = pcall(fn, link)
+    if ok then return quality end
+    return nil
 end
 
 local function scanMerchant()

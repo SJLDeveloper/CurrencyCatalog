@@ -6,7 +6,7 @@ same spirit without re-deriving decisions from the code. Keep it current: when
 a design decision changes or a release ships, update this file in the same
 commit.
 
-Last updated: 2026-11-23. Current release: **v1.2.3** (v1.2.4 maintenance update committed, awaiting in-game test before tagging). Author: Shannon (GitHub `SJLDeveloper`).
+Last updated: 2026-11-23. Current release: **v1.2.4** (tested 2026-11-23; tag + push pending on Shannon's side). Author: Shannon (GitHub `SJLDeveloper`).
 
 ---
 
@@ -206,9 +206,9 @@ Known fragile spots, in order of likelihood to break on a patch:
 | `3f88027` | 2026-11-17 | README corrections (flat-layout install steps, removed disabled-button mention, version footer). No code change. |
 | `4442cb8` | 2026-11-17 | Add `CCDesign.md`. |
 | (housekeeping) | 2026-11-17 | Removed stray `vv1.2.3` tag; Lua syntax check of all five files clean; pushed `main` to GitHub (`v1.2.3` tag was already there). |
-| v1.2.4 (`d5c0626`, untagged) | 2026-11-23 | Maintenance for Retail 12.1.5 (build 70783). TOC Interface 120100 → 120105. Replaced removed deprecation-shim globals: `GetItemInfoInstant`/`GetItemInfo` → `C_Item.*` (Scanner.lua), `GetCoinTextureString` → `C_CurrencyInfo.GetCoinTextureString` (UI.lua), each keeping the old global as fallback. Deployed to live AddOns folder; **needs `/reload` test** (open a currency vendor, confirm scan + detail-panel gold line), then tag `v1.2.4` and push. |
+| v1.2.4 (`d5c0626`..) | 2026-11-23 | Maintenance for Retail 12.1.5 (build 70783). TOC Interface 120100 → 120105. Replaced removed deprecation-shim globals: `GetItemInfoInstant`/`GetItemInfo` → `C_Item.*` (Scanner.lua, via pcall'd helpers `itemInfoInstant`/`itemQuality`, no `select`), `GetCoinTextureString` → `C_CurrencyInfo.GetCoinTextureString` (UI.lua), each keeping the old global as fallback. **Tested in game by Shannon: vendor scan OK.** (An initial "Scanner.lua:189 attempt to call a nil value" during testing turned out to be a client-side interface issue on Shannon's end, not code.) Ready to tag `v1.2.4` and push. |
 
-Current state: v1.2.4 deployed to live, awaiting Shannon's in-game verification. Live install matches repo HEAD.
+Current state: v1.2.4 deployed to live and verified in game. Live install matches repo HEAD. No open bugs.
 
 Patch-tracking note: Blizzard removed the `Blizzard_Deprecated*` compatibility addons in 12.1.5, so **any** remaining use of a pre-C_ global that once had a shim will now be a nil call. When a future patch lands, grep the code for bare globals and compare against the wiki page `Patch_<ver>/API_changes`. Next known PTR: 12.1.7 (Interface 120107).
 
