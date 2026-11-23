@@ -72,4 +72,4 @@ Put that number on the `## Interface:` line.
 | `UI.lua` | Catalog window, currency/item lists, detail panel |
 | `CurrencyButton.lua` | Currency-tab icon + footer button |
 
-Version 1.2.3
+Version 1.2.4

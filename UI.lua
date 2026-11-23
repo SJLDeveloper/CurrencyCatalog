@@ -197,7 +197,13 @@ local function refreshDetail()
         lines[#lines + 1] = ("%s %d  %s"):format(tex, amount, c and c.name or ("Currency " .. cid))
     end
     if rec.gold and rec.gold > 0 then
-        lines[#lines + 1] = GetCoinTextureString(rec.gold)
+        -- GetCoinTextureString global shim removed in 12.1.5; use C_CurrencyInfo.
+        local coinFn = (C_CurrencyInfo and C_CurrencyInfo.GetCoinTextureString) or GetCoinTextureString
+        if coinFn then
+            lines[#lines + 1] = coinFn(rec.gold)
+        else
+            lines[#lines + 1] = ("%dg"):format(math.floor(rec.gold / 10000))
+        end
     end
     detail.cost:SetText("Cost: " .. table.concat(lines, "   "))
 

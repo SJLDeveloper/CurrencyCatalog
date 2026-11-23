@@ -4,7 +4,7 @@
 local ADDON, ns = ...
 
 ns.name = ADDON
-ns.version = "1.2.3"
+ns.version = "1.2.4"
 
 -- Default shape of the persisted database.
 local DB_DEFAULTS = {

@@ -1,8 +1,8 @@
-## Interface: 120100
+## Interface: 120105
 ## Title: Currency Catalog
 ## Notes: Catalogs everything buyable with non-gold currencies, scanned live from vendors. Opens beside the character sheet.
 ## Author: Shannon
-## Version: 1.2.3
+## Version: 1.2.4
 ## SavedVariables: CurrencyCatalogDB
 ## OptionalDeps: TomTom
 ## IconTexture: Interface\Icons\inv_misc_coin_02

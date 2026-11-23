@@ -174,6 +174,25 @@ local function merchantItemInfo(index)
     return nil
 end
 
+-- Item info. The global GetItemInfo / GetItemInfoInstant shims were removed in
+-- 12.1.5 (Blizzard_Deprecated* addons dropped); prefer the C_Item namespace and
+-- keep the globals as a fallback for older clients.
+local function itemInfoInstant(link)
+    if C_Item and C_Item.GetItemInfoInstant then return C_Item.GetItemInfoInstant(link) end
+    if GetItemInfoInstant then return GetItemInfoInstant(link) end
+    return nil
+end
+
+local function itemQuality(link)
+    local q
+    if C_Item and C_Item.GetItemInfo then
+        q = select(3, C_Item.GetItemInfo(link))
+    elseif GetItemInfo then
+        q = select(3, GetItemInfo(link))
+    end
+    return q
+end
+
 local function scanMerchant()
     local npcID = recordVendor()
     local n = GetMerchantNumItems() or 0
@@ -186,10 +205,10 @@ local function scanMerchant()
         if itemLink and name then
             local costs, gold = readCosts(i, price)
             if hasCurrencyCost(costs) then
-                local itemID, itemType, itemSubType, equipLoc, _, classID, subClassID = GetItemInfoInstant(itemLink)
+                local itemID, itemType, itemSubType, equipLoc, _, classID, subClassID = itemInfoInstant(itemLink)
                 if itemID then
                     offered[itemID] = true
-                    local quality = select(3, GetItemInfo(itemLink))
+                    local quality = itemQuality(itemLink)
                     local cosmetic = false
                     if C_Item and C_Item.IsCosmeticItem then
                         local okc, res = pcall(C_Item.IsCosmeticItem, itemID)

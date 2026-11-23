@@ -6,7 +6,7 @@ same spirit without re-deriving decisions from the code. Keep it current: when
 a design decision changes or a release ships, update this file in the same
 commit.
 
-Last updated: 2026-11-17. Current release: **v1.2.3**. Author: Shannon (GitHub `SJLDeveloper`).
+Last updated: 2026-11-23. Current release: **v1.2.3** (v1.2.4 maintenance update committed, awaiting in-game test before tagging). Author: Shannon (GitHub `SJLDeveloper`).
 
 ---
 
@@ -175,10 +175,10 @@ If the shape ever changes, bump `version` and migrate in `applyDefaults`'s calle
 |------|------|
 | Currency | `C_CurrencyInfo.GetCurrencyListSize`, `.GetCurrencyListInfo`, `.GetCurrencyListLink`, `.GetCurrencyIDFromLink`, `.GetCurrencyInfo` |
 | Merchant | `GetMerchantNumItems`, `GetMerchantItemLink`, `C_MerchantFrame.GetItemInfo` (fallback `GetMerchantItemInfo`), `GetMerchantItemCostInfo`, `GetMerchantItemCostItem`, `GetMerchantFilter`, `LE_LOOT_FILTER_ALL` |
-| Items | `GetItemInfoInstant`, `GetItemInfo`, `C_Item.IsCosmeticItem`, `C_Item.GetItemQualityColor`, `GameTooltip:SetItemByID` |
+| Items | `C_Item.GetItemInfoInstant`, `C_Item.GetItemInfo` (globals `GetItemInfoInstant`/`GetItemInfo` kept only as fallback; their shims were removed in 12.1.5), `C_Item.IsCosmeticItem`, `C_Item.GetItemQualityColor`, `GameTooltip:SetItemByID` |
 | Units / tooltips | `UnitGUID`, `UnitName`, `C_TooltipInfo.GetUnit`, `TooltipUtil.SurfaceArgs`, hidden `GameTooltipTemplate` fallback, `LEVEL` global string |
 | Map / nav | `C_Map.GetBestMapForUnit`, `.GetMapInfo`, `.GetPlayerMapPosition`, `.SetUserWaypoint`, `UiMapPoint.CreateFromCoordinates`, `C_SuperTrack.SetSuperTrackedUserWaypoint`, `TomTom:AddWaypoint` |
-| UI templates | `BackdropTemplate`, `FauxScrollFrameTemplate` (+ `FauxScrollFrame_*` helpers), `WowStyle1DropdownTemplate` / `DropdownButton` with `SetupMenu`/`CreateRadio`, `InputBoxTemplate`, `UIPanelButtonTemplate`, `UIPanelCloseButton`, `BreakUpLargeNumbers`, `GetCoinTextureString` |
+| UI templates | `BackdropTemplate`, `FauxScrollFrameTemplate` (+ `FauxScrollFrame_*` helpers), `WowStyle1DropdownTemplate` / `DropdownButton` with `SetupMenu`/`CreateRadio`, `InputBoxTemplate`, `UIPanelButtonTemplate`, `UIPanelCloseButton`, `BreakUpLargeNumbers`, `C_CurrencyInfo.GetCoinTextureString` (global `GetCoinTextureString` fallback only; shim removed in 12.1.5) |
 | Blizzard frames hooked | `CharacterFrame` (OnHide), `TokenFrame` / `TokenFrame.ScrollBox` / legacy `TokenFramePanel.buttons`, `MerchantFrame` (IsShown only) |
 | Events | `ADDON_LOADED`, `PLAYER_LOGIN`, `MERCHANT_SHOW`, `MERCHANT_UPDATE` |
 
@@ -207,7 +207,9 @@ Known fragile spots, in order of likelihood to break on a patch:
 | `4442cb8` | 2026-11-17 | Add `CCDesign.md`. |
 | (housekeeping) | 2026-11-17 | Removed stray `vv1.2.3` tag; Lua syntax check of all five files clean; pushed `main` to GitHub (`v1.2.3` tag was already there). |
 
-Current state: **no open bugs reported.** Live install matches repo HEAD. No work in flight.
+Current state: v1.2.4 deployed to live, awaiting Shannon's in-game verification. Live install matches repo HEAD.
+
+Patch-tracking note: Blizzard removed the `Blizzard_Deprecated*` compatibility addons in 12.1.5, so **any** remaining use of a pre-C_ global that once had a shim will now be a nil call. When a future patch lands, grep the code for bare globals and compare against the wiki page `Patch_<ver>/API_changes`. Next known PTR: 12.1.7 (Interface 120107).
 
 ## 9. How to brief a fresh session
 
