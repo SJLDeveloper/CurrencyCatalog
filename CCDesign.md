@@ -206,6 +206,7 @@ Known fragile spots, in order of likelihood to break on a patch:
 | `3f88027` | 2026-11-17 | README corrections (flat-layout install steps, removed disabled-button mention, version footer). No code change. |
 | `4442cb8` | 2026-11-17 | Add `CCDesign.md`. |
 | (housekeeping) | 2026-11-17 | Removed stray `vv1.2.3` tag; Lua syntax check of all five files clean; pushed `main` to GitHub (`v1.2.3` tag was already there). |
+| v1.2.4 (`d5c0626`, untagged) | 2026-11-23 | Maintenance for Retail 12.1.5 (build 70783). TOC Interface 120100 → 120105. Replaced removed deprecation-shim globals: `GetItemInfoInstant`/`GetItemInfo` → `C_Item.*` (Scanner.lua), `GetCoinTextureString` → `C_CurrencyInfo.GetCoinTextureString` (UI.lua), each keeping the old global as fallback. Deployed to live AddOns folder; **needs `/reload` test** (open a currency vendor, confirm scan + detail-panel gold line), then tag `v1.2.4` and push. |
 
 Current state: v1.2.4 deployed to live, awaiting Shannon's in-game verification. Live install matches repo HEAD.
 
